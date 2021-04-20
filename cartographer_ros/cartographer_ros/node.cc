@@ -291,6 +291,7 @@ void Node::PublishLocalTrajectoryData(const ::ros::TimerEvent& timer_event) {
           std::vector<geometry_msgs::TransformStamped> stamped_transforms;
 
           stamped_transform.header.frame_id = node_options_.map_frame;
+          stamped_transform.header.stamp = ros::Time::now() + ros::Duration(0.15);
           stamped_transform.child_frame_id =
               trajectory_data.trajectory_options.odom_frame;
           stamped_transform.transform =
@@ -308,6 +309,7 @@ void Node::PublishLocalTrajectoryData(const ::ros::TimerEvent& timer_event) {
           tf_broadcaster_.sendTransform(stamped_transforms);
         } else {
           stamped_transform.header.frame_id = node_options_.map_frame;
+          stamped_transform.header.stamp = ros::Time::now() + ros::Duration(0.15);
           stamped_transform.child_frame_id =
               trajectory_data.trajectory_options.published_frame;
           stamped_transform.transform = ToGeometryMsgTransform(
